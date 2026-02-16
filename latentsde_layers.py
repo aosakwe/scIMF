@@ -2,7 +2,13 @@ import torch
 import torch.nn as nn
 import math
 from collections import OrderedDict
-import Dev.torchsde_addfloat as torchsde
+try:
+    import Dev.torchsde_addfloat as torchsde
+except ModuleNotFoundError:
+    try:
+        import torchsde_addfloat as torchsde
+    except ModuleNotFoundError:
+        import torchsde
 from torchdiffeq import odeint_adjoint as odeint
     
 
@@ -80,7 +86,8 @@ class Block(nn.Module):
     def __init__(self,
                  d_model, 
                  num_heads, 
-                 attn_drop_ratio=0.):
+                 attn_drop_ratio=0.,
+                 use_FFN=True):
         super(Block, self).__init__()
         self.norm1 = nn.LayerNorm(d_model)
         self.attn = SelfAttention(d_model, num_heads, attn_drop_ratio=attn_drop_ratio)

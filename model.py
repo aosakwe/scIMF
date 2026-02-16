@@ -1,9 +1,12 @@
 import torch
-import Dev.torchsde_addfloat as torchsde
+try:
+    import torchsde_addfloat as torchsde
+except ModuleNotFoundError:
+    import torchsde
 import torch.nn as nn
-from Dev.utils import p_samp
+from utils import p_samp
 import torch.distributions as dist
-from Dev.latentsde_layers import Drift_inter, Drift_intra, Diffusion
+from latentsde_layers import Drift_inter, Drift_intra, Diffusion
 
 
 

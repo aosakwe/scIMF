@@ -89,7 +89,7 @@ def load_data_Panc(args):
 
 def load_data(args):
 
-        if args.for_train == False:
+    if args.for_train == False:
         args.out_dir = "/".join(args.out_dir.split("/")[:2])
         args.data_dir = "/".join(args.data_dir.split("/")[:2])
 
